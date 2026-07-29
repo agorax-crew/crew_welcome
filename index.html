@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daum 커뮤니티 · 2기 공식 토픽 에디터 핸드북</title>
+
+<!--
+ ┌───────────────────────────────────────────────────────────────┐
+ │ 발송/게시 전 확인 항목                                            │
+ │ https://cafe.daum.net/agorax https://open.kakao.com/o/g1LtOUEi {정보폼URL} 링크 3곳 → 실제 링크로 치환    │
+ │ 리워드: 공고 3기둥(월10만·리그 최대200만·어워즈 최대100만) 확정 반영본. │
+ │ 단가 조정 시 CHAPTER 05 표와 ‘이렇게 하면 이만큼’ 박스만 함께 수정.        │
+ └───────────────────────────────────────────────────────────────┘
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+
+<style>
+  :root{
+    --ink:#211C33;
+    --purple:#6B5FC7;
+    --purple-deep:#4A3FA8;
+    --paper:#FBFAFF;
+    --lilac:#EEEBFA;
+    --lilac-line:#E4E0F0;
+    --gold:#B8892A;
+    --gold-soft:#F6EFD8;
+    --muted:#6E6885;
+    --danger:#C0392B;
+    --ok:#2E8B57;
+    --shadow:0 8px 30px rgba(74,63,168,.10);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:"Gowun Batang","Nanum Myeongjo",serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px;}
+
+  /* ── 상단 네비 ── */
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(251,250,255,.86);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--lilac-line);
+  }
+  nav .wrap{display:flex;align-items:center;gap:14px;height:52px;overflow-x:auto;scrollbar-width:none;}
+  nav .wrap::-webkit-scrollbar{display:none}
+  nav .brand{font-weight:800;color:var(--purple-deep);white-space:nowrap;letter-spacing:.5px;font-size:14px;}
+  nav a{color:var(--muted);text-decoration:none;font-size:13px;white-space:nowrap;font-weight:600;}
+  nav a:hover{color:var(--purple)}
+
+  /* ── 히어로 ── */
+  header.hero{
+    background:linear-gradient(150deg,#5B4FBF 0%,#4A3FA8 60%,#3A3086 100%);
+    color:#fff;padding:64px 0 58px;text-align:center;position:relative;overflow:hidden;
+  }
+  header.hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(600px 240px at 50% -40px,rgba(255,255,255,.16),transparent 70%);
+  }
+  .hero .eyebrow{font-size:13px;letter-spacing:4px;color:rgba(255,255,255,.72);margin:0 0 18px;}
+  .hero h1{
+    font-family:"Gowun Batang",serif;font-weight:700;margin:0;
+    font-size:clamp(32px,7vw,54px);line-height:1.22;letter-spacing:-.5px;
+  }
+  .hero .sub{margin:20px auto 0;max-width:520px;color:rgba(255,255,255,.9);font-size:16px;}
+  .hero .meta{margin-top:30px;display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  .hero .chip{
+    border:1px solid rgba(255,255,255,.35);border-radius:999px;
+    padding:7px 15px;font-size:13px;font-weight:600;color:#fff;
+  }
+
+  section{padding:60px 0;border-bottom:1px solid var(--lilac-line);}
+  section:last-of-type{border-bottom:none}
+  .eyebrow{font-size:12.5px;letter-spacing:2.5px;font-weight:700;color:var(--purple);margin:0 0 8px;}
+  .chapter-no{font-family:"Gowun Batang",serif;color:var(--lilac-line);font-size:15px;}
+  h2{font-family:"Gowun Batang",serif;font-weight:700;font-size:clamp(24px,4.4vw,34px);margin:2px 0 18px;line-height:1.3;letter-spacing:-.5px;}
+  h3{font-size:19px;font-weight:800;margin:30px 0 10px;color:var(--purple-deep);}
+  p{margin:0 0 14px}
+  strong{font-weight:800}
+  .lead{font-size:17px;color:#3a3550}
+  .muted{color:var(--muted)}
+  a.inline{color:var(--purple);font-weight:700}
+
+  .card{background:#fff;border:1px solid var(--lilac-line);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow);}
+  .card + .card{margin-top:14px}
+  .tint{background:var(--lilac);border:1px solid var(--lilac-line);border-radius:16px;padding:22px 24px;}
+  .gold{background:var(--gold-soft);border:1px solid #EAD9A8;border-radius:16px;padding:22px 24px;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:620px){.grid2{grid-template-columns:1fr}}
+
+  /* 카테고리 pills */
+  .cats{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 4px}
+  .cat{display:flex;align-items:baseline;gap:8px;background:#fff;border:1px solid var(--lilac-line);border-radius:12px;padding:12px 16px;}
+  .cat b{font-size:16px}
+  .cat span{font-size:13px;color:var(--muted)}
+
+  /* 미션 박스 */
+  .mission{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:620px){.mission{grid-template-columns:1fr}}
+  .mission .big{font-family:"Gowun Batang",serif;font-size:42px;font-weight:700;color:var(--purple-deep);line-height:1}
+  .mission .u{font-size:14px;color:var(--muted);margin-left:4px}
+
+  /* 점수 배지 */
+  .weight{display:inline-block;background:var(--purple);color:#fff;font-weight:800;font-size:12px;padding:2px 9px;border-radius:999px;margin-left:6px}
+
+  /* 표 */
+  table.rw{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:6px}
+  table.rw th,table.rw td{text-align:left;padding:12px 12px;border-bottom:1px solid var(--lilac-line);vertical-align:top}
+  table.rw th{color:var(--muted);font-weight:700;font-size:12.5px;letter-spacing:.5px;background:var(--lilac)}
+  table.rw td b{color:var(--purple-deep)}
+  table.rw .amt{white-space:nowrap;font-weight:800;color:var(--gold);text-align:right}
+  .scroll-x{overflow-x:auto}
+
+  /* 타임라인 */
+  .tl{position:relative;margin-top:10px;padding-left:26px}
+  .tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--lilac-line)}
+  .tl .step{position:relative;padding:0 0 20px}
+  .tl .step::before{content:"";position:absolute;left:-26px;top:5px;width:14px;height:14px;border-radius:50%;background:var(--purple);border:3px solid #fff;box-shadow:0 0 0 1px var(--lilac-line)}
+  .tl .d{font-weight:800;color:var(--purple-deep)}
+
+  /* 좋은글/아쉬운글 */
+  .ex{border-radius:14px;padding:18px 20px}
+  .ex.good{background:#F0F7F2;border:1px solid #CDE7D6}
+  .ex.bad{background:#FBF1F0;border:1px solid #F0D3CF}
+  .ex .tag{font-weight:800;font-size:13px;letter-spacing:.5px;display:inline-flex;align-items:center;gap:6px;margin-bottom:8px}
+  .ex.good .tag{color:var(--ok)} .ex.bad .tag{color:var(--danger)}
+  .ex .post{background:#fff;border-radius:10px;padding:12px 14px;font-size:14.5px;line-height:1.6}
+
+  /* 계산기 */
+  .calc{background:linear-gradient(150deg,#4A3FA8,#3A3086);border-radius:22px;padding:26px 24px;color:#fff;box-shadow:var(--shadow)}
+  .calc h3{color:#fff;margin:0 0 4px;font-size:20px}
+  .calc .hint{color:rgba(255,255,255,.72);font-size:13px;margin:0 0 20px}
+  .field{margin-bottom:16px}
+  .field .row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;font-size:14px}
+  .field .row .lab{font-weight:700}
+  .field .row .val{font-weight:800;font-variant-numeric:tabular-nums}
+  .field .row .cap{color:rgba(255,255,255,.6);font-size:12px;margin-left:6px;font-weight:600}
+  .field input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:999px;background:rgba(255,255,255,.22);outline:none}
+  .field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+  .field input[type=range]::-moz-range-thumb{width:20px;height:20px;border:none;border-radius:50%;background:#fff;cursor:pointer}
+  .calc .score{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:20px;text-align:center;margin-top:6px}
+  .calc .score .n{font-family:"Gowun Batang",serif;font-size:56px;font-weight:700;line-height:1}
+  .calc .score .l{font-size:13px;color:rgba(255,255,255,.75);letter-spacing:2px}
+  .calc .bd{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:14px;font-size:12.5px;color:rgba(255,255,255,.8);justify-content:center}
+  .calc .bd b{color:#fff}
+  .mgate{margin-top:12px;font-size:13px;text-align:center;font-weight:700}
+  .mgate.ok{color:#9BE7B8} .mgate.no{color:#FFC7BE}
+
+  /* FAQ */
+  details{background:#fff;border:1px solid var(--lilac-line);border-radius:14px;padding:2px 18px;margin-bottom:10px}
+  details summary{cursor:pointer;font-weight:800;padding:14px 0;list-style:none;color:var(--purple-deep)}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";float:right;color:var(--purple);font-weight:800}
+  details[open] summary::after{content:"−"}
+  details .a{padding:0 0 16px;color:#3a3550;font-size:15px}
+
+  .cta{display:inline-block;background:var(--purple);color:#fff;text-decoration:none;font-weight:800;padding:13px 24px;border-radius:12px;margin:6px 8px 6px 0}
+  .cta.ghost{background:#fff;color:var(--purple);border:1.5px solid var(--purple)}
+  [data-tbd]{background:var(--gold-soft);border-bottom:1.5px dashed var(--gold);padding:0 4px;border-radius:3px;color:var(--gold);font-weight:700}
+
+  footer{background:var(--purple-deep);color:rgba(255,255,255,.85);text-align:center;padding:40px 22px}
+  footer .s{font-family:"Gowun Batang",serif;font-size:20px;color:#fff;margin-bottom:8px}
+
+  a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #C9BFF2;outline-offset:2px;border-radius:6px}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">EDITOR HANDBOOK</span>
+    <a href="#s1">오리엔테이션</a>
+    <a href="#s2">활동 개요</a>
+    <a href="#s3">주간 미션</a>
+    <a href="#s4">에디터 스코어</a>
+    <a href="#s5">리워드</a>
+    <a href="#s6">정산</a>
+    <a href="#s7">활동 가이드</a>
+    <a href="#s8">운영 규칙</a>
+    <a href="#s9">소통·일정</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">DAUM COMMUNITY · SEASON 2</p>
+    <h1>공식 토픽 에디터<br>핸드북</h1>
+    <p class="sub">당신의 한 줄이 Daum의 첫 화면이 됩니다.<br>2기 활동에 필요한 모든 것을 여기에 담았어요.</p>
+    <div class="meta">
+      <span class="chip">10주 · 8/3(월) 시작</span>
+      <span class="chip">4개 토픽 · 스포츠·연예·경제·라이프</span>
+      <span class="chip">격주 리그 · 총 5회</span>
+    </div>
+  </div>
+</header>
+
+<!-- 01 -->
+<section id="s1">
+  <div class="wrap">
+    <p class="eyebrow">CHAPTER 01 <span class="chapter-no">/ 오리엔테이션</span></p>
+    <h2>‘토픽 에디터’로 바뀐 이유</h2>
+    <p class="lead">1기가 ‘콘텐츠·리액션’ 역할로 나뉘어 있었다면, 2기는 <strong>내가 가장 잘 아는 주제</strong>를 중심으로 다시 짰습니다.</p>
+    <p>1기를 돌아보며 얻은 가장 큰 배움은, 외부 유저의 반응이 적었던 건 크루의 노력 부족이 아니라 <strong>‘무엇을 이야기하느냐’의 문제</strong>였다는 점입니다. Daum 이용자는 뉴스·스포츠·경제를 보러 오는 분들인데, 글은 생활·취미 쪽으로 몰려 있었죠.</p>
+    <p>그래서 2기는 <strong>토픽별 에디터 체제</strong>로 전환합니다. 각자 하나의 주제를 맡아, 그 판에서 화제를 만들고 대화를 끌어내는 것 — 그것이 에디터의 역할입니다.</p>
+    <div class="tint" style="margin-top:8px">
+      <p style="margin:0"><strong>에디터의 미션 한 줄 요약</strong><br>“내 토픽에서, 일반 유저가 <u>반응하고 싶어지는</u> 글을 만든다.”</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section id="s2">
+  <div class="wrap">
+    <p class="eyebrow">CHAPTER 02 <span class="chapter-no">/ 활동 개요</span></p>
+    <h2>한눈에 보는 2기</h2>
+    <div class="grid2">
+      <div class="card"><p class="muted" style="margin:0 0 4px">활동 기간</p><p style="margin:0"><strong>10주</strong> · 8월 3일(월) 시작</p></div>
+      <div class="card"><p class="muted" style="margin:0 0 4px">토픽</p><p style="margin:0"><strong>4개 토픽</strong> (스포츠·연예·경제·라이프)</p></div>
+      <div class="card"><p class="muted" style="margin:0 0 4px">정산</p><p style="margin:0"><strong>기본급 월 · 리그 격주(5회)</strong></p></div>
+      <div class="card"><p class="muted" style="margin:0 0 4px">활동 무대</p><p style="margin:0"><strong>Daum 커뮤니티 앱/웹</strong> + 공식 다음카페</p></div>
+    </div>
+
+    <h3>토픽</h3>
+    <div class="cats">
+      <div class="cat"><b>스포츠</b></div>
+      <div class="cat"><b>연예</b></div>
+      <div class="cat"><b>경제</b></div>
+      <div class="cat"><b>라이프</b></div>
+    </div>
+    <p class="muted" style="font-size:14px;margin-top:10px">※ 원글은 배정받은 <strong>본인 토픽</strong>에 작성합니다. 답글은 토픽에 관계없이 어디에나 달 수 있어요.</p>
+  </div>
+</section>
+
+<!-- 03 -->
+<section id="s3">
+  <div class="wrap">
+    <p class="eyebrow">CHAPTER 03 <span class="chapter-no">/ 주간 미션</span></p>
+    <h2>매주, 이만큼이 기본</h2>
+    <p class="lead">월요일~일요일이 1주입니다. 아래 <strong>주간 미션</strong>을 달성하면 그 주 활동이 인정됩니다.</p>
+    <div class="mission" style="margin-top:12px">
+      <div class="tint">
+        <p class="muted" style="margin:0">원글</p>
+        <p style="margin:6px 0 0"><span class="big">7</span><span class="u">건 / 주</span></p>
+        <p style="margin:8px 0 0;font-size:14px">본인 토픽에 작성<br><strong>이 중 투표형 글 2건 이상</strong> 포함</p>
+      </div>
+      <div class="tint">
+        <p class="muted" style="margin:0">답글</p>
+        <p style="margin:6px 0 0"><span class="big">15</span><span class="u">건 / 주</span></p>
+        <p style="margin:8px 0 0;font-size:14px">토픽 무관, 어디에나 OK<br>(다른 토픽·일반 유저 글 포함)</p>
+      </div>
+    </div>
+    <div class="gold" style="margin-top:14px">
+      <p style="margin:0"><strong>왜 투표형 글을 강조할까요?</strong><br>낯선 사람이 대화에 참여하는 첫 단계는 ‘댓글’이 아니라 ‘투표(클릭 한 번)’입니다. 참여의 사다리를 한 칸 낮춰주는 투표형 글이, 결국 더 많은 반응으로 이어집니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section id="s4">
+  <div class="wrap">
+    <p class="eyebrow">CHAPTER 04 <span class="chapter-no">/ 에디터 스코어</span></p>
+    <h2>점수는 이렇게 매겨져요</h2>
+    <p class="lead">미션이 ‘기본선’이라면, <strong>에디터 스코어</strong>는 그 위에서 성과를 재는 지표입니다. 리그·어워즈 후보는 이 점수로 압축돼요.</p>
+
+    <div class="card" style="margin-top:8px">
+      <p style="margin:0 0 10px;font-weight:800">에디터 스코어 = 생산 + 소통 + 반응</p>
+      <p style="margin:0 0 4px;font-weight:800;color:var(--purple)">📝 생산 — 내가 만든 글</p>
+      <p style="margin:0 0 14px;line-height:2">
+        원글 <span class="weight">×4</span> <span class="muted">(기준 10건)</span><br>
+        투표형 보너스 <span class="weight">×3</span> <span class="muted">(2건까지만)</span>
+      </p>
+      <p style="margin:0 0 4px;font-weight:800;color:var(--purple)">💬 소통 — 내가 나눈 대화</p>
+      <p style="margin:0 0 14px;line-height:2">
+        답글 <span class="muted">(일반유저·타토픽)</span> <span class="weight">×2</span> <span class="muted">(기준 40건)</span><br>
+        크루 답글 <span class="muted">(품앗이)</span> <span class="weight">×1</span> <span class="muted">(최대 15건)</span><br>
+        내 글 대댓글 <span class="muted">(달린 답글에 다시 답하기)</span> <span class="weight">×3</span> <span class="muted">(기준 10건)</span>
+      </p>
+      <p style="margin:0 0 4px;font-weight:800;color:var(--purple)">🔥 반응 — 외부에서 받은 호응</p>
+      <p style="margin:0;line-height:2">
+        받은 외부 댓글 <span class="weight">×5</span> <span class="muted">(기준 100)</span><br>
+        받은 외부 투표 <span class="weight">×2</span> <span class="muted">(기준 500)</span>
+      </p>
+    </div>
+    <div class="gold" style="margin-top:12px">
+      <p style="margin:0"><strong>‘기준선’에서 멈추지 않아도 돼요 🔥</strong><br>
+      각 항목의 ‘기준’을 넘어도 점수는 계속 쌓입니다. <strong>초과분은 50%로 반영</strong>돼요. 즉 많이 할수록 리그에서 더 높은 등급(S)에 계속 유리합니다.<br>
+      게다가 <strong>활동량이 많을수록 ‘특별상’(총량 최다) 수상 확률이 올라가요.</strong> (댓글소환왕·투표설계자·구조대왕 등)</p>
+    </div>
+    <p class="muted" style="font-size:14px;margin-top:12px">
+      · <strong>투표형 보너스는 2건까지만</strong> — 미션(투표 2건)만 채우면 충분, 일반 원글도 ×4로 제값.<br>
+      · <strong>답글·대댓글(소통)</strong>을 원글보다 크게 우대해요. 대화를 이어가는 에디터가 판을 살리니까요.<br>
+      · <strong>대댓글</strong> = 내 글에 달린 답글에 내가 다시 답하는 것. 진짜 소통에 가점.<br>
+      · 크루끼리 답글(품앗이)만 예외로 <strong>×1, 최대 15건까지만</strong> 반영돼요. (아래 운영 규칙 참고)
+    </p>
+
+    <!-- 시그니처: 계산기 -->
+    <div class="calc" style="margin-top:22px">
+      <h3>내 점수 미리 계산해보기 🧮</h3>
+      <p class="hint">슬라이더를 움직이면 점수가 실시간으로 바뀝니다. 이번 주 목표를 세워보세요.</p>
+
+      <div class="field">
+        <div class="row"><span class="lab">원글 수 <span class="cap">기준 10 · 초과 50%</span></span><span class="val" id="v_won">7</span></div>
+        <input type="range" id="won" min="0" max="15" value="7" aria-label="원글 수">
+      </div>
+      <div class="field">
+        <div class="row"><span class="lab">그중 투표형 글 <span class="cap">보너스 2건까지</span></span><span class="val" id="v_tog">2</span></div>
+        <input type="range" id="tog" min="0" max="15" value="2" aria-label="투표형 글 수">
+      </div>
+      <div class="field">
+        <div class="row"><span class="lab">답글(일반유저·타토픽) <span class="cap">기준 40 · 초과 50%</span></span><span class="val" id="v_ro">15</span></div>
+        <input type="range" id="ro" min="0" max="60" value="15" aria-label="외부 답글 수">
+      </div>
+      <div class="field">
+        <div class="row"><span class="lab">크루 답글(품앗이) <span class="cap">최대 15</span></span><span class="val" id="v_rc">5</span></div>
+        <input type="range" id="rc" min="0" max="30" value="5" aria-label="크루 답글 수">
+      </div>
+      <div class="field">
+        <div class="row"><span class="lab">내 글 대댓글(소통) <span class="cap">기준 10 · 초과 50%</span></span><span class="val" id="v_rr">5</span></div>
+        <input type="range" id="rr" min="0" max="20" value="5" aria-label="대댓글 수">
+      </div>
+      <div class="field">
+        <div class="row"><span class="lab">받은 외부 댓글 <span class="cap">기준 100 · 초과 50%</span></span><span class="val" id="v_ec">10</span></div>
+        <input type="range" id="ec" min="0" max="150" value="10" aria-label="받은 외부 댓글 수">
+      </div>
+      <div class="field">
+        <div class="row"><span class="lab">받은 외부 투표 <span class="cap">기준 500 · 초과 50%</span></span><span class="val" id="v_ev">40</span></div>
+        <input type="range" id="ev" min="0" max="700" value="40" step="10" aria-label="받은 외부 투표 수">
+      </div>
+
+      <div class="score">
+        <div class="l">MY EDITOR SCORE</div>
+        <div class="n" id="score">0</div>
+        <div class="bd" id="breakdown"></div>
+      </div>
+      <div class="mgate" id="mgate"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section id="s5">
+  <div class="wrap">
+    <p class="eyebrow">CHAPTER 05 <span class="chapter-no">/ 리워드</span></p>
+    <h2>노력한 만큼, 확실하게</h2>
+    <p class="lead">리워드는 <strong>① 기본급 · ② 격주 리그 · ③ 격주 특별상 · ④ 럭키 개근상 · ⑤ 시즌 어워즈</strong>로 구성됩니다. ②는 <strong>등급(상위 %)</strong>으로, ③은 <strong>활동 총량(누가 제일 많이 했나)</strong>으로 뽑아요. 성과 리워드는 정량 점수로 후보를 추린 뒤 <strong>정성 평가를 더해 종합</strong> 선정합니다.</p>
+
+    <div class="scroll-x">
+      <table class="rw">
+        <thead><tr><th>구분</th><th>내용</th><th class="amt">리워드</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>① 기본급</b><br><span class="muted" style="font-size:12px">월 정산</span></td>
+            <td>주 미션 달성 시 <strong>주당 25,000원</strong> · 달성한 주만 분할 지급<br><span class="muted" style="font-size:12px">미션 달성 시 <strong>월 100,000원 보장</strong> · 한 달에 2주 이상 미달 시 해당 월 미지급</span></td>
+            <td class="amt">월 최대<br>100,000</td>
+          </tr>
+          <tr>
+            <td><b>② 격주 카테고리 리그</b><br><span class="muted" style="font-size:12px">2주마다 · 총 5회</span></td>
+            <td>카테고리별 <strong>상위 %</strong>로 등급 시상 (카테고리 크기와 무관하게 같은 비율)<br><span class="muted" style="font-size:12px">S 상위 ~5% · A ~5–15% · B ~15–28%<br>정량 점수로 후보 → 정성 평가 종합해 확정</span></td>
+            <td class="amt">S 300,000<br>A 100,000<br>B 50,000</td>
+          </tr>
+          <tr>
+            <td><b>③ 격주 특별상</b><br><span class="muted" style="font-size:12px">2주마다 · 총량 기준</span></td>
+            <td><strong>많이 할수록 유리한 상.</strong> 등급과 별개로 총량 최다에게<br><span class="muted" style="font-size:12px">🗣️ 댓글소환왕(받은 외부 댓글) · 🗳️ 투표설계자(받은 외부 투표)<br>🚁 구조대왕(타토픽·일반유저 답글) · 🌱 라이징(리그 무수상자 중 최고)</span></td>
+            <td class="amt">트랙별<br>최대 100,000</td>
+          </tr>
+          <tr>
+            <td><b>④ 럭키 개근상</b><br><span class="muted" style="font-size:12px">매주</span></td>
+            <td>한 주 <strong>7일 모두 활동</strong>(원글·답글 1건 이상) + 주간 미션 달성자 대상<br><span class="muted" style="font-size:12px">매주 추첨 · 월 정산에 합산</span></td>
+            <td class="amt">주 10,000<br><span class="muted" style="font-size:12px">추첨 40명</span></td>
+          </tr>
+          <tr>
+            <td><b>⑤ 시즌 파이널 어워즈</b><br><span class="muted" style="font-size:12px">시즌 종료 시</span></td>
+            <td>시즌 전체 누적 성과 <strong>1·2·3등</strong>에게<br><span class="muted" style="font-size:12px">전 카테고리 통합 순위</span></td>
+            <td class="amt">1등 1,000,000<br>2등 300,000<br>3등 150,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="gold" style="margin-top:16px">
+      <p style="margin:0"><strong>이렇게 하면 이만큼</strong><br>
+      · 기본 미션만 꾸준히(10주) → 시즌 최대 <strong>250,000원</strong><br>
+      · 매 회차 <strong>S 등급 + 특별상</strong>을 모두 받으면 → 시즌 최대 <strong>2,000,000원</strong> ((S 30만+특별 10만)×5회)<br>
+      · 여기에 <strong>시즌 전체 1등</strong>까지 → +1,000,000원</p>
+    </div>
+    <div class="tint" style="margin-top:14px">
+      <p style="margin:0 0 6px"><strong>리워드 수령 규칙</strong></p>
+      <p style="margin:0;font-size:14.5px">· <strong>기본급 · 리그 등급 · 특별상은 함께 받을 수 있어요</strong> (한 회차에 최대 3종).<br>
+      · 단 <strong>리그 등급은 최고 1개, 특별상도 1트랙</strong>만 인정돼요.<br>
+      · 순위 동점 시에는 <strong>아직 상을 받지 못한 분에게 우선권</strong>을 드립니다. (더 많은 에디터에게 골고루)</p>
+    </div>
+    <p class="muted" style="font-size:13.5px;margin-top:12px">
+      ※ 1기 우수 활동자와 2기 신규 에디터는 <strong>동일한 리워드 기준</strong>이 적용됩니다. (1기 활동 이력은 호칭·명예로 예우)<br>
+      ※ 정산은 세무 정보 제출·<strong>카카오페이 가입</strong>이 완료된 분에 한해 지급됩니다.
+    </p>
+  </div>
+</section>
+
+<!-- 06 -->
+<section id="s6">
+  <div class="wrap">
+    <p class="eyebrow">CHAPTER 06 <span class="chapter-no">/ 정산</span></p>
+    <h2>언제, 어떻게 받나요</h2>
+    <div class="grid2">
+      <div class="card"><p class="muted" style="margin:0 0 4px">산정 주기</p><p style="margin:0"><strong>미션은 주 · 리그는 격주</strong><br><span class="muted" style="font-size:13px">개근상은 매주, 어워즈는 시즌 말</span></p></div>
+      <div class="card"><p class="muted" style="margin:0 0 4px">지급 주기</p><p style="margin:0"><strong>모든 리워드 월 합산</strong><br><span class="muted" style="font-size:13px">→ 익월(다음 달)에 일괄 지급</span></p></div>
+    </div>
+    <div class="gold" style="margin-top:14px">
+      <p style="margin:0 0 6px"><strong>💰 지급은 ‘카카오페이 포인트’로!</strong></p>
+      <p style="margin:0;font-size:15px">리워드는 계좌 입금이 아니라 <strong>카카오페이 포인트</strong>로 지급됩니다.<br>
+      받으시려면 <strong>카카오페이 가입(카카오페이 머니 이용 등록)이 필수</strong>예요. 미가입 상태면 포인트를 받을 수 없으니, 활동 시작 전 꼭 준비해 주세요.</p>
+    </div>
+    <div class="tint" style="margin-top:14px">
+      <p style="margin:0 0 6px"><strong>정산을 위해 꼭 필요한 것</strong></p>
+      <p style="margin:0;font-size:15px">① 리워드·세무 정보 폼 제출 (사전 준비) · ② <strong>카카오페이 가입</strong> · ③ 주간 미션 달성 기록<br>
+      <span class="muted" style="font-size:13.5px">세 가지가 확인되지 않으면 리워드가 이월/보류될 수 있어요.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section id="s7">
+  <div class="wrap">
+    <p class="eyebrow">CHAPTER 07 <span class="chapter-no">/ 활동 가이드 & 시나리오</span></p>
+    <h2>어떻게 써야 반응이 올까</h2>
+    <p class="lead">점수의 핵심은 ‘외부 반응’. 반응이 붙는 글에는 공통점이 있어요. 토픽별 예시로 감을 잡아보세요.</p>
+
+    <h3>① 좋은 원글 vs 아쉬운 원글</h3>
+    <div class="grid2" style="margin-top:6px">
+      <div class="ex good">
+        <div class="tag">✔ 반응이 붙는 글 — 스포츠</div>
+        <div class="post">“손흥민 결장, 토트넘 오늘 경기 이길 수 있을까? 전반 라인업 보니 불안한데… 여러분 예상 스코어는?”</div>
+        <p style="margin:10px 0 0;font-size:13.5px" class="muted">→ 지금 화제 + 의견을 묻는 열린 질문 = 댓글·투표 유발</p>
+      </div>
+      <div class="ex bad">
+        <div class="tag">✕ 아쉬운 글 — 스포츠</div>
+        <div class="post">“어제 경기 봤는데 재밌었다. 다들 봤나요?”</div>
+        <p style="margin:10px 0 0;font-size:13.5px" class="muted">→ 무슨 경기인지·왜 봐야 하는지 없음 = 스쳐 지나감</p>
+      </div>
+      <div class="ex good">
+        <div class="tag">✔ 반응이 붙는 글 — 경제</div>
+        <div class="post">“기준금리 동결 발표. 내 대출 이자엔 사실상 영향 0인데, 그럼 지금 예금 갈아타는 게 이득일까요?”</div>
+        <p style="margin:10px 0 0;font-size:13.5px" class="muted">→ 뉴스 + ‘내 삶에 뭐가 달라지나’로 연결</p>
+      </div>
+      <div class="ex bad">
+        <div class="tag">✕ 아쉬운 글 — 경제</div>
+        <div class="post">“오늘 금리 동결됐네요.”</div>
+        <p style="margin:10px 0 0;font-size:13.5px" class="muted">→ 사실 전달만. 대화할 여지가 없음</p>
+      </div>
+    </div>
+    <p class="muted" style="font-size:13.5px;margin-top:10px">공통 공식 = <strong>지금 화제 + 나(우리)의 이야기 + 열린 질문.</strong></p>
+
+    <h3>② 투표형 글, 이렇게 만들면 잘 돌아요</h3>
+    <div class="card">
+      <p style="margin:0 0 8px"><strong>좋은 투표 = 답이 갈리고, 누구나 한쪽을 고를 수 있는 것</strong></p>
+      <p style="margin:0;font-size:14.5px;line-height:1.9">
+      · [연예] “이번 컴백 타이틀곡, 역대급 vs 그냥 그럭저럭 — 당신의 선택은?”<br>
+      · [라이프] “여름휴가, 바다 🆚 계곡. 둘 중 하나만 평생 가야 한다면?”<br>
+      · [라이프] “탕수육은 부먹? 찍먹? (이 논쟁 아직 안 끝났다)”<br>
+      · [경제] “올해 안에 금리 내린다 vs 안 내린다, 어디에 거시겠어요?”</p>
+    </div>
+    <p class="muted" style="font-size:13.5px;margin-top:8px">TIP. 선택지는 2~3개가 참여율이 가장 높아요. 너무 뻔한 정답이 있으면 투표가 안 돌아갑니다.</p>
+
+    <h3>③ 구조대 활동 — 답글로 점수 벌기</h3>
+    <div class="tint">
+      <p style="margin:0 0 6px"><strong>구조대 = 내 토픽 밖(다른 토픽·일반 유저 글)에 다는 답글.</strong></p>
+      <p style="margin:0;font-size:14.5px">반응이 적어 외로운 글, 막 올라와 아직 답글이 없는 글에 <strong>제일 먼저 진심 어린 답글</strong>을 남겨보세요. 대화의 물꼬를 트는 답글이 판 전체를 살립니다.</p>
+      <p style="margin:10px 0 0;font-size:13.5px" class="muted">※ 판단 기준은 ‘글이 어느 토픽에 있느냐’ 위치 기준입니다. (별도 추적 없음)</p>
+    </div>
+
+    <h3>④ 일주일 루틴 예시</h3>
+    <div class="tl">
+      <div class="step"><span class="d">월~화</span> — 이번 주 토픽에서 뜰 화제 2~3개 찜하기 · 원글 2건 + 투표형 1건 발행</div>
+      <div class="step"><span class="d">수~목</span> — 반응 확인하며 원글 이어가기(누적 5건+) · 다른 토픽 돌며 답글(구조대) 활동</div>
+      <div class="step"><span class="d">금~토</span> — 투표형 글로 주말 참여 유도 · 내 글 댓글에 답 달아주며 대화 이어가기</div>
+      <div class="step"><span class="d">일</span> — 미션 최종 점검 (원글 7 / 투표형 2 / 답글 15) · 마감 전 부족분 채우기</div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section id="s8">
+  <div class="wrap">
+    <p class="eyebrow">CHAPTER 08 <span class="chapter-no">/ 운영 규칙</span></p>
+    <h2>꼭 지켜주세요</h2>
+    <div class="card">
+      <h3 style="margin-top:4px">크루끼리 ‘품앗이’ 답글은 차등 반영</h3>
+      <p style="margin:0">서로 응원하는 크루 문화는 우리의 힘이에요. 그래서 크루 대상 답글도 <strong>0점이 아니라 점수로 인정</strong>합니다. 다만 일반 유저 대상 답글(×2)보다 낮은 <strong>×1</strong>, 그리고 <strong>주 15건까지만</strong> 반영돼요. 우리가 궁극적으로 재는 건 <strong>일반 유저의 진짜 반응</strong>이라, 크루끼리 점수 몰아주기(farming)는 상한으로 막습니다. (에디터 계정은 시스템에서 자동 구분됩니다.)</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:4px">건강한 활동 기준</h3>
+      <p style="margin:0">· 도배·복붙·의미 없는 반복 글은 미션 인정에서 제외됩니다.<br>· 타인 비방, 저작권 침해, 허위정보는 즉시 제재 대상입니다.<br>· 자격 유지: 정해진 기준 미달이 반복되면 활동이 종료될 수 있어요.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:4px">닉네임 = 신원</h3>
+      <p style="margin:0">카페·오픈채팅·활동 계정의 <strong>닉네임을 동일하게</strong> 유지해 주세요. 정산·수상 확인의 기준이 됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section id="s9">
+  <div class="wrap">
+    <p class="eyebrow">CHAPTER 09 <span class="chapter-no">/ 소통 & 일정</span></p>
+    <h2>지금 해야 할 것</h2>
+
+    <h3>사전 준비 (7/31 금 자정까지)</h3>
+    <div class="tl">
+      <div class="step"><span class="d">7/29 (수)</span> — 합격 안내 메일 수신</div>
+      <div class="step"><span class="d">~ 7/31 (금)</span> — ① 다음카페 가입(승인제) · ② 공지 오픈채팅방 입장 · ③ 세무 정보 폼 제출</div>
+      <div class="step"><span class="d">8/3 (월)</span> — <strong>활동 시작! 첫 주 미션 스타트 🚀</strong></div>
+    </div>
+
+    <div class="tint" style="margin-top:16px">
+      <p style="margin:0 0 8px"><strong>공식 채널</strong></p>
+      <p style="margin:0;font-size:14.5px">
+      · <strong>다음카페</strong> (메인) — 공지·정산·가이드의 모든 것. <span class="muted">비공개/승인제라 <u>활동 닉네임을 정확히</u> 넣어 가입 신청해 주세요.</span><br>
+      · <strong>오픈채팅방</strong> — 긴급 공지·실시간 안내. <span class="muted">입장 비번 <strong>260803</strong> · 입장 후 프로필명을 활동 닉네임으로 변경.</span></p>
+      <div style="margin-top:14px">
+        <a class="cta" href="https://cafe.daum.net/agorax">다음카페 가입 →</a>
+        <a class="cta ghost" href="https://open.kakao.com/o/g1LtOUEi">오픈채팅 입장 →</a>
+        <a class="cta ghost" href="{정보폼URL}">세무 폼 제출 →</a>
+      </div>
+    </div>
+
+    <h3>자주 묻는 질문</h3>
+    <details><summary>원글은 꼭 제 토픽에만 써야 하나요?</summary><div class="a">네, 원글은 배정받은 본인 토픽에 작성해 주세요. 대신 <strong>답글은 어느 토픽이든</strong> 자유롭게 달 수 있고, 그게 곧 구조대 활동이 됩니다.</div></details>
+    <details><summary>투표형 글 2건은 원글 7건에 포함인가요?</summary><div class="a">포함입니다. 원글 7건 중 2건 이상을 투표형으로 쓰면 돼요. 단 점수에서 <strong>투표형 보너스는 2건까지만</strong> 붙으니, 나머지는 일반 원글로 채워도 손해가 없습니다.</div></details>
+    <details><summary>미션을 못 채운 주가 있으면 어떻게 되나요?</summary><div class="a">그 주는 기본급(주 2.5만원)이 지급되지 않아요. 또한 <strong>한 달에 2주 이상</strong> 미달하면 해당 월 기본급이 지급되지 않습니다. 리그·어워즈는 별도 성과 기준으로 판단합니다.</div></details>
+    <details><summary>1기 때보다 리워드가 적어 보이는데요?</summary><div class="a">기본급 구조가 달라졌을 뿐, 격주 리그(최대 200만)와 시즌 전체 1등(100만)까지 더하면 상위 활동자는 시즌 300만 원 이상도 가능합니다. 1기·2기 리워드 기준은 동일하게 적용됩니다.</div></details>
+    <details><summary>크루끼리 서로 답글 달아줘도 되나요?</summary><div class="a">네, 좋아요! 크루 대상 답글도 점수로 인정돼요. 다만 일반 유저 대상 답글(×2)보다 낮은 <strong>×1</strong>, <strong>주 15건까지</strong>만 반영됩니다. 훈훈한 문화는 살리되 점수 몰아주기는 상한으로 막는 취지예요.</div></details>
+  </div>
+</section>
+
+<footer>
+  <div class="s">이제, 당신의 첫 글을 기다립니다.</div>
+  <p style="margin:0">Daum 커뮤니티 기획팀 드림 · © 2026 Daum Community</p>
+</footer>
+
+<script>
+  (function(){
+    var ids = ["won","tog","ro","rc","rr","ec","ev"];
+    var el = {};
+    ids.forEach(function(id){ el[id] = document.getElementById(id); });
+    var v = {
+      won:document.getElementById("v_won"), tog:document.getElementById("v_tog"),
+      ro:document.getElementById("v_ro"), rc:document.getElementById("v_rc"),
+      rr:document.getElementById("v_rr"), ec:document.getElementById("v_ec"), ev:document.getElementById("v_ev")
+    };
+    var out=document.getElementById("score"), bd=document.getElementById("breakdown"), gate=document.getElementById("mgate");
+    function fmt(n){ return n.toLocaleString("ko-KR"); }
+
+    function calc(){
+      var won=+el.won.value, tog=+el.tog.value, ro=+el.ro.value, rc=+el.rc.value,
+          rr=+el.rr.value, ec=+el.ec.value, ev=+el.ev.value;
+      // 투표형은 원글 수를 넘을 수 없음
+      if(tog>won){ tog=won; el.tog.value=won; }
+
+      // 소프트캡: 기준선까지 w, 초과분은 w*0.5
+      function soft(x, base, w){ x=+x; var over=Math.max(0,x-base); return (Math.min(x,base)*w) + over*(w*0.5); }
+
+      var pWon = soft(won,10,4);          // 원글 ×4, 기준 10
+      var pTog = Math.min(tog,2)*3;       // 투표형 보너스 ×3, 2건까지만 (하드)
+      var pRo  = soft(ro,40,2);           // 외부 답글 ×2, 기준 40
+      var pRc  = Math.min(rc,15)*1;       // 크루 답글(품앗이) ×1, 최대 15 (하드)
+      var pRr  = soft(rr,10,3);           // 대댓글 ×3, 기준 10
+      var pEc  = soft(ec,100,5);          // 받은 외부 댓글 ×5, 기준 100
+      var pEv  = soft(ev,500,2);          // 받은 외부 투표 ×2, 기준 500
+      var total = Math.round(pWon+pTog+pRo+pRc+pRr+pEc+pEv);
+
+      v.won.textContent=won; v.tog.textContent=tog; v.ro.textContent=ro;
+      v.rc.textContent=rc; v.rr.textContent=rr; v.ec.textContent=fmt(ec); v.ev.textContent=fmt(ev);
+      out.textContent = fmt(total);
+      bd.innerHTML =
+        "생산 <b>"+Math.round(pWon+pTog)+"</b> · 소통 <b>"+Math.round(pRo+pRc+pRr)+"</b> · 반응 <b>"+Math.round(pEc+pEv)+"</b>";
+
+      var missionOk = (won>=7 && tog>=2 && (ro+rc)>=15);
+      gate.className = "mgate " + (missionOk ? "ok" : "no");
+      gate.textContent = missionOk
+        ? "✔ 주간 미션 충족! (원글 7·투표형 2·답글 15)"
+        : "미션 최소선: 원글 7건 · 투표형 2건 · 답글 15건";
+    }
+    ids.forEach(function(id){ el[id].addEventListener("input", calc); });
+    calc();
+  })();
+</script>
+</body>
+</html>
